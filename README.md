@@ -1,6 +1,6 @@
 # Deep Learning & Its Applications
 
-My coursework for **4C16 Deep Learning & Its Applications** at Trinity College Dublin. All models are written in PyTorch.
+My coursework for the **5C16 Deep Learning & Its Applications** module at Trinity College Dublin. All models are written in PyTorch.
 
 ## Contents
 

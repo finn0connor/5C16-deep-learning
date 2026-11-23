@@ -1,0 +1,16 @@
+# Lab 7 super-resolution - packages for the local GPU setup.
+#
+# STEP 1 - install PyTorch with GPU support FIRST (the normal pip version on Windows is CPU-only):
+#     pip install torch torchvision --index-url https://download.pytorch.org/whl/cu130
+#
+# STEP 2 - then install everything else:
+#     pip install -r requirements.txt
+
+numpy             # arrays, loading the .npz dataset
+scikit-image      # skimage.transform.rescale for downsampling (lab 7 notebook)
+scikit-learn      # train_test_split (as in lab 5)
+torchmetrics      # SSIM metric
+torchinfo         # model summary (as in lab 5)
+tqdm              # progress bars (as in lab 5)
+matplotlib        # graphs and example images
+ipykernel         # lets VS Code run the notebook with this environment

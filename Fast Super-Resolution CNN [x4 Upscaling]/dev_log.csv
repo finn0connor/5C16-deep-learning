@@ -1,0 +1,13 @@
+date,run,notes,channels,skip,loss,epochs,flip,params,psnr,ssim,bicubic_psnr,bicubic_ssim,ms_per_frame,train_minutes
+2026-11-23 18:38,v1 baseline,"starter recipe: MSE, Adam lr 0.001, 32 channels, bicubic shortcut, flips",32,True,mse,10,True,62339,26.622,0.6679,25.484,0.606,0.468,0.9
+2026-11-23 18:56,v2 L1 + 30 epochs,"L1 instead of MSE (EDSR paper says it gives sharper results), 30 epochs since v1 was still improving at epoch 10",32,True,l1,30,True,62339,26.695,0.6732,25.484,0.606,0.415,2.8
+2026-11-23 19:02,v3 64 channels,v2 levelled off around 26.7 dB so trying double the width to see if model size is the limit,64,True,l1,30,True,245507,26.779,0.6768,25.484,0.606,0.45,4.6
+2026-11-23 19:12,v4 128 channels,"64 channels gave +0.09 dB over 32, trying 128 to see if the gains keep shrinking",128,True,l1,30,True,974339,26.793,0.6765,25.484,0.606,0.537,8.9
+2026-11-23 19:27,v5 64ch + cosine LR,"width maxed out at 64, curves flat and noisy at fixed lr so trying cosine lr decay (handout 07)",64,True,l1,30,True,245507,26.789,0.6769,25.484,0.606,0.476,4.6
+2026-11-23 19:36,v6 8 layers,"width and lr schedule both maxed out, trying 8 conv layers instead of 4 so each pixel sees more of the image",64,True,l1,30,True,393219,26.741,0.6743,25.484,0.606,0.665,5.0
+2026-11-23 19:45,v7 8 layers + residual,"8 plain layers was worse than 4 with higher train loss (hard to optimise), adding resnet skip connections to fix it",64,True,l1,30,True,393219,26.788,0.677,25.484,0.606,0.77,5.2
+2026-11-23 19:55,v8 no shortcut,ablation on v5: removing the bicubic shortcut to see how much it contributes,64,False,l1,30,True,245507,26.564,0.6677,25.484,0.606,0.418,4.6
+2026-11-23 20:02,v9 no flips,ablation on v5: removing flip augmentation to see how much it contributes,64,True,l1,30,False,245507,26.732,0.6745,25.484,0.606,0.448,4.5
+2026-11-23 20:57,v10 final,"final model = v5 settings: 64ch, 4 layers, L1, cosine lr, flips, bicubic shortcut",64,True,l1,30,True,245507,26.779,0.6765,25.484,0.606,0.466,4.6
+2026-11-23 21:12,v10 final,"final model = v5 settings: 64ch, 4 layers, L1, cosine lr, flips, bicubic shortcut",64,True,l1,30,True,245507,26.783,0.6765,25.484,0.606,0.443,4.6
+2026-11-23 21:24,v11 luma only,"v10 but only predicting brightness detail, colour left to bicubic (starter notebook hint, RAISR / SRCNN only enhance luma)",64,True,l1,30,True,244353,26.726,0.6743,25.484,0.606,0.451,4.9
